@@ -191,9 +191,6 @@ if (isset($_SESSION['token'])) {
 		<h1>Exchange</h1>
 		<div class="exchange-container">
 			<?php
-	echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
 			if (isset($_GET['oid'])) $oid = $_GET['oid'];
 			
 			if (isset($oid) && !isset($rid)) {
@@ -235,7 +232,7 @@ echo '</pre>';
 			}
 			
 			if (!isset($_SESSION['rid'])) {
-				if (isset($oid) && !empty($oid) && $restoretype != 'tenant') {
+				if (isset($oid) && !empty($oid) && !preg_match('/tenant/', $restoretype)) {
 					$users = $veeam->getLicensedUsers($oid);
 					$repo = $veeam->getOrganizationRepository($oid);
 					$usersarray = array();
